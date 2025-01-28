@@ -16,19 +16,35 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Rick And Morty'),
         centerTitle: true,
       ),
-      body: const Column(
-        children: [
-          SizedBox(
-            height: 300,
-            width: double.infinity *0.9,
-            child: EpisodeCardList()
-          ),
-          SizedBox(
-            height: 500,
-            width: double.infinity *0.9,
-            child: EpisodeCardList()
-          ),
-        ],
+      body: const Padding(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Pesquisar',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                      style: BorderStyle.solid
+                    )
+                  )
+                ),
+                
+              ),
+            ),
+            Expanded(
+              child: EpisodeCardList()  
+            ),
+            SizedBox(
+              height: 70,
+              child: Card(child: Text('data'),),
+            ),
+          ],
+        ),
       ),
     );
   }

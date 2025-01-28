@@ -8,7 +8,8 @@ class EpisodeCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 2,
+      shrinkWrap: true,
+      itemCount: 50,
       itemBuilder: (ctx, i){
         return Card(
           child: SizedBox(
