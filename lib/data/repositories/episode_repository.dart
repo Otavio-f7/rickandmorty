@@ -1,3 +1,4 @@
+import 'package:rickandmorty/data/service/exceptions.dart';
 import 'package:rickandmorty/data/service/http_client.dart';
 import 'package:rickandmorty/domain/episode_model.dart';
 
@@ -24,12 +25,10 @@ class ProdutoRepository implements IEpisodeRepository{
       }).toList;
 
       return episodes;
-    } else if(response.statusCode != 200){
-      final List<EpisodeModel> episodes = [];
-      return episodes;
+    } else if(response.statusCode == 404){
+      throw NotFoundException(message: 'URL nao encontrada');
     } else{
-      final List<EpisodeModel> episodes = [];
-      return episodes;
+      throw Exception('Nao foi possivel carregar');
     }
   }
 
