@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rickandmorty/ui/pages/episodes_page.dart';
 import 'package:rickandmorty/ui/pages/favorites_page.dart';
-import 'package:rickandmorty/ui/widget/episode_card_list.dart';
+import 'package:rickandmorty/ui/pages/watched_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,7 +34,8 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: setCurrentPage,
         children: const [
           EpisodesPage(),
-          FavoritesPage()
+          FavoritesPage(),
+          WatchedPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Todos'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favoritos'),
+          BottomNavigationBarItem(icon: Icon(Icons.remove_red_eye_outlined), label: 'Vistos'),
         ],
         onTap: (page){
           pc.animateToPage(

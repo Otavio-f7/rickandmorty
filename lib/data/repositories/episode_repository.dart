@@ -6,10 +6,10 @@ abstract class IEpisodeRepository{
   Future<List<EpisodeModel>> getEpisodes();
 }
 
-class ProdutoRepository implements IEpisodeRepository{
+class EpisodeRepository implements IEpisodeRepository{
   final IHttpClient client;
 
-  ProdutoRepository({required this.client});
+  EpisodeRepository({required this.client});
 
   // Chamando API
   @override
@@ -18,12 +18,28 @@ class ProdutoRepository implements IEpisodeRepository{
       url: 'https://rickandmortyapi.com/api/episode'
     );
     if(response.statusCode == 200){
-      final List<EpisodeModel> episodes = [];
-      response.data['result'].map((ep){
-        final EpisodeModel episode = EpisodeModel.fromMap(ep);
-        episodes.add(episode);
-      }).toList;
+      List<EpisodeModel> episodes = [];
 
+      for (var episode in response.data['results']) {
+        episodes.add(
+          EpisodeModel(
+            id: episode['id'] as int, 
+            name: episode['name'] as String, 
+            airDate: episode['air_date'] as String, 
+            episode: episode['episode'] as String, 
+            characters: List<String>.from(episode['characters'] as List),
+            url: episode['url'] as String,
+          )
+        );
+      }
+
+
+      // response.data['results'].map((ep){
+      //   final EpisodeModel episode = EpisodeModel.fromMap(ep);
+      //   episodes.add(episode);
+      // }).toList;
+      
+      
       return episodes;
     } else if(response.statusCode == 404){
       throw NotFoundException(message: 'URL nao encontrada');
